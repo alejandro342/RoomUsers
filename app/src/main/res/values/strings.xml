@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">RoomProject</string>
+
+    <string name="txt_email_void_register_user">Campo correo vacío</string>
+    <string name="txt_password_void_register_user">Campo contraseña vacío</string>
+    <string name="txt_email_valid_void_register_user">Correo no válido</string>
+    <string name="title_activity_register_users">RegisterUsersActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+</resources>
