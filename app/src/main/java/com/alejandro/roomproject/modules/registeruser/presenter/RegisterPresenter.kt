@@ -1,9 +1,11 @@
 package com.alejandro.roomproject.modules.registeruser.presenter
 
 import android.content.Context
+import androidx.fragment.app.FragmentManager
 import androidx.room.Room
 import com.alejandro.roomproject.basepresenter.BasePresenterUser
 import com.alejandro.roomproject.data.entity.AppDatabase
+import com.alejandro.roomproject.dialogs.saveuser.DialogSaveUser
 import com.alejandro.roomproject.extenciones.myToast
 import com.alejandro.roomproject.models.Users
 import com.alejandro.roomproject.modules.registeruser.interfaces.InterfaceRegister
@@ -13,7 +15,8 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 
-class RegisterPresenter(var mContext: Context) : InterfaceRegister, BasePresenterUser(),
+class RegisterPresenter(var mContext: Context, var mDialog: InterfaceRegister.dialog) :
+    InterfaceRegister, BasePresenterUser(),
     CoroutineScope {
 
     override val coroutineContext: CoroutineContext = Dispatchers.IO
@@ -57,6 +60,7 @@ class RegisterPresenter(var mContext: Context) : InterfaceRegister, BasePresente
 
             mUser = Users(user, name, email, password, true)
             addUser(room, mUser)
+            mDialog.showDialog()
             mContext.myToast("Usuario creado correctamente")
 
         } else {

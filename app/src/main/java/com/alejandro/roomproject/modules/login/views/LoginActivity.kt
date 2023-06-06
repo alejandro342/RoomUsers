@@ -15,17 +15,25 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         mBinding = ActivityLoginBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(mBinding!!.root)
+
         mPresenterLogin = PresenterLogin(this)
         mBinding!!.btnLogin.setOnClickListener(this)
+        mBinding!!.registerAccount.setOnClickListener(this)
+        mBinding!!.forgotMyDetails.setOnClickListener(this)
+
     }
 
 
     override fun onClick(mItem: View?) {
         when (mItem) {
-             mBinding!!.btnLogin -> mPresenterLogin?.loginUser(
-                 mBinding!!.editEmailLogin.text.toString().trim(),
-                 mBinding!!.editPasswordLogin.text.toString().trim()
-             )
+            mBinding!!.btnLogin -> mPresenterLogin?.loginUser(
+                mBinding!!.editEmailLogin.text.toString().trim(),
+                mBinding!!.editPasswordLogin.text.toString().trim()
+            )
+
+            mBinding!!.registerAccount -> mPresenterLogin?.registerAccount()
+
+            mBinding!!.forgotMyDetails -> mPresenterLogin?.forgotMyDetails()
         }
     }
 }

@@ -10,4 +10,7 @@ interface InterfaceRegister {
         status: Boolean
     ): Boolean
 
+    interface dialog {
+        fun showDialog()
+    }
 }

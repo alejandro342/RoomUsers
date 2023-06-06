@@ -7,4 +7,15 @@
     <string name="title_activity_register_users">RegisterUsersActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
+
+    <!--Text_Login-->
+    <string name="textRegister">Aun no tienes cuenta?</string>
+    <string name="forgotMyDetails">Olvide mis datos</string>
+
+    <!--Text_Dialogs-->
+    <string name="text_save_user">Usuario guardado</string>
+    <string name="text_error_save_user">Error al guardar usuario</string>
+
+    <!--Bottom-->
+    <string name="btn_accept">ACEPTAR</string>
 </resources>

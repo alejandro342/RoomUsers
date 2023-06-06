@@ -7,11 +7,10 @@ import androidx.room.Room
 import com.alejandro.roomproject.R
 import com.alejandro.roomproject.basepresenter.BasePresenterUser
 import com.alejandro.roomproject.data.entity.AppDatabase
-import com.alejandro.roomproject.data.roomdb.RoomDataBase.Companion.database
 import com.alejandro.roomproject.extenciones.myToast
 import com.alejandro.roomproject.modules.login.interfaces.InterfaceLogin
+import com.alejandro.roomproject.modules.menu.view.MenuActivity
 import com.alejandro.roomproject.modules.registeruser.views.RegisterUsersActivity
-import com.alejandro.roomproject.modules.users.views.ui.users.InfoUsersActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -55,11 +54,29 @@ class PresenterLogin(var mContext: Context) : InterfaceLogin, BasePresenterUser(
             val user = userDao.loginUser(email, password)
             withContext(Dispatchers.Main) {
                 if (user != null) {
-                    Toast.makeText(mContext, "exit", Toast.LENGTH_SHORT).show()
+                    loginSuccessful()
                 } else {
-                    Toast.makeText(mContext, "datos erroneos", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        mContext,
+                        "El correo o la contraseña esta mal",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
+    }
+
+    fun registerAccount() {
+        val mIntent = Intent(mContext, RegisterUsersActivity::class.java)
+        mContext.startActivity(mIntent)
+    }
+
+    fun forgotMyDetails() {
+        mContext.myToast("olvi")
+    }
+
+    private fun loginSuccessful() {
+        val mIntent = Intent(mContext, MenuActivity::class.java)
+        mContext.startActivity(mIntent)
     }
 }

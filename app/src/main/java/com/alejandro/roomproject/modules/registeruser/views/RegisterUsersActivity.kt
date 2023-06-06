@@ -6,23 +6,25 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentManager
 import com.alejandro.roomproject.R
 import com.alejandro.roomproject.databinding.ActivityRegisterUsersBinding
+import com.alejandro.roomproject.dialogs.saveuser.DialogSaveUser
 import com.alejandro.roomproject.models.Users
+import com.alejandro.roomproject.modules.registeruser.interfaces.InterfaceRegister
 import com.alejandro.roomproject.modules.registeruser.presenter.RegisterPresenter
 
-class RegisterUsersActivity : AppCompatActivity(), View.OnClickListener {
+class RegisterUsersActivity : AppCompatActivity(), View.OnClickListener, InterfaceRegister.dialog {
 
     private var mBinding: ActivityRegisterUsersBinding? = null
     private var mRegisterPresenter: RegisterPresenter? = null
     private var mToolbar: Toolbar? = null
-    lateinit var mUser: Users
     override fun onCreate(savedInstanceState: Bundle?) {
         mBinding = ActivityRegisterUsersBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(mBinding!!.root)
         toolbar()
-        mRegisterPresenter = RegisterPresenter(this)
+        mRegisterPresenter = RegisterPresenter(this, this)
         mBinding!!.btnRegister.setOnClickListener(this)
     }
 
@@ -45,6 +47,11 @@ class RegisterUsersActivity : AppCompatActivity(), View.OnClickListener {
                 true
             )
         }
+    }
+
+    override fun showDialog() {
+        val mDialogSaveUser = DialogSaveUser()
+        mDialogSaveUser.show(supportFragmentManager, "my_dialog")
     }
 
 }
