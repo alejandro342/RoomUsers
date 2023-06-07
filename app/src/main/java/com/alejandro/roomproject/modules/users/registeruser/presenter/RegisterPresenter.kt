@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.alejandro.roomproject.basepresenter.BasePresenterUser
 import com.alejandro.roomproject.data.entity.AppDatabase
+import com.alejandro.roomproject.data.roomdb.RoomDataBase
 import com.alejandro.roomproject.extenciones.myToast
 import com.alejandro.roomproject.models.Users
 import com.alejandro.roomproject.modules.users.registeruser.interfaces.InterfaceRegister
@@ -20,13 +21,10 @@ class RegisterPresenter(private var mContext: Context, var mDialog: InterfaceReg
     override val coroutineContext: CoroutineContext = Dispatchers.IO
 
     //Room
-    var room: AppDatabase
+    private val miRoomDB = RoomDataBase.getInstance(mContext.applicationContext)
+    private val miBD = miRoomDB.getMiBaseDeDatos()
+
     lateinit var mUser: Users
-
-    init {
-        room = Room.databaseBuilder(mContext, AppDatabase::class.java, "my_database").build()
-
-    }
 
     override fun registerData(
         user: String,
@@ -57,7 +55,7 @@ class RegisterPresenter(private var mContext: Context, var mDialog: InterfaceReg
         } else if (password.equals(repeatPassword)) {
 
             mUser = Users(user, name, email, password, true)
-            addUser(room, mUser)
+            addUser(miBD, mUser)
             mDialog.showDialog()
             mContext.myToast("Usuario creado correctamente")
 

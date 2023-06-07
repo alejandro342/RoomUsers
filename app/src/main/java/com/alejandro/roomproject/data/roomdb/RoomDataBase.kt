@@ -1,21 +1,29 @@
 package com.alejandro.roomproject.data.roomdb
 
-import android.app.Application
+
+import android.content.Context
 import androidx.room.Room
 import com.alejandro.roomproject.data.entity.AppDatabase
 
-class RoomDataBase : Application() {
+class RoomDataBase private constructor(context: Context) {
+
+    private val miBaseDeDatos: AppDatabase = Room.databaseBuilder(
+        context.applicationContext,
+        AppDatabase::class.java,
+        "my_database"
+    ).build()
+
     companion object {
-        lateinit var database: AppDatabase
+        @Volatile
+        private var INSTANCE: RoomDataBase? = null
+
+        fun getInstance(context: Context): RoomDataBase =
+            INSTANCE ?: synchronized(this) {
+                INSTANCE ?: RoomDataBase(context).also { INSTANCE = it }
+            }
     }
 
-    override fun onCreate() {
-        super.onCreate()
-
-        database = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java,
-            "my-database"
-        ).build()
+    fun getMiBaseDeDatos(): AppDatabase {
+        return miBaseDeDatos
     }
 }

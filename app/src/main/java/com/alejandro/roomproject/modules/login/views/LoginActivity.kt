@@ -20,8 +20,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         mBinding!!.btnLogin.setOnClickListener(this)
         mBinding!!.registerAccount.setOnClickListener(this)
         mBinding!!.forgotMyDetails.setOnClickListener(this)
-
-
+        mPresenterLogin?.getFromSession()
     }
 
 

@@ -11,6 +11,16 @@
         layout="@layout/my_toolbar" />
 
     <ImageView
+        android:id="@+id/img_close_session"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="35dp"
+        android:src="@drawable/ic_close_session"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
         android:id="@+id/Img_Item_User"
         android:layout_width="130dp"
         android:layout_height="130dp"

@@ -30,7 +30,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/myColorGreen"
-        android:text="@string/btn_accept"
+        android:text="@string/btn_close_session_accept"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
