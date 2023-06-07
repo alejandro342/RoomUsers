@@ -22,6 +22,7 @@ class MenuActivity : AppCompatActivity(), View.OnClickListener {
         mPresenterMenu = PresenterMenu(this)
         mBinding!!.goToViewUsers.setOnClickListener(this)
         mBinding!!.goToRegisterUsers.setOnClickListener(this)
+        mBinding!!.goToViewProfile.setOnClickListener(this)
         toolbar()
     }
 
@@ -41,6 +42,7 @@ class MenuActivity : AppCompatActivity(), View.OnClickListener {
             mBinding!!.goToRegisterUsers -> {
                 mPresenterMenu?.goToRegister()
             }
+            mBinding!!.goToViewProfile ->{ mPresenterMenu?.goToProfile()}
         }
     }
 }

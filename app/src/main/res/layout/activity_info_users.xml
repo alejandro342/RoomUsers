@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".modules.users.views.ui.users.InfoUsersActivity">
+    tools:context=".modules.users.informationusers.views.ui.users.InfoUsersActivity">
 
     <include layout="@layout/my_toolbar" />
 

@@ -1,4 +1,4 @@
-package com.alejandro.roomproject.modules.users.views.ui.users
+package com.alejandro.roomproject.modules.users.informationusers.views.ui.users
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
@@ -14,8 +14,8 @@ import com.alejandro.roomproject.data.entity.AppDatabase
 import com.alejandro.roomproject.databinding.ActivityInfoUsersBinding
 import com.alejandro.roomproject.extenciones.myToast
 import com.alejandro.roomproject.models.Users
-import com.alejandro.roomproject.modules.users.interfaces.InterfaceUsers
-import com.alejandro.roomproject.modules.users.views.adapter.AdapterUsers
+import com.alejandro.roomproject.modules.users.informationusers.interfaces.InterfaceUsers
+import com.alejandro.roomproject.modules.users.informationusers.views.adapter.AdapterUsers
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

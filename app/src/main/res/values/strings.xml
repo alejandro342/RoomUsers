@@ -5,8 +5,6 @@
     <string name="txt_password_void_register_user">Campo contraseña vacío</string>
     <string name="txt_email_valid_void_register_user">Correo no válido</string>
     <string name="title_activity_register_users">RegisterUsersActivity</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
 
     <!--Text_Login-->
     <string name="textRegister">Aun no tienes cuenta?</string>
@@ -15,6 +13,9 @@
     <!--Text_Dialogs-->
     <string name="text_save_user">Usuario guardado</string>
     <string name="text_error_save_user">Error al guardar usuario</string>
+
+    <string name="text_charge_password">Su contraseña se cambio</string>
+    <string name="text_error_change_password">Error al actualizar contraseña</string>
 
     <!--Bottom-->
     <string name="btn_accept">ACEPTAR</string>

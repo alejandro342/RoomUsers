@@ -1,4 +1,4 @@
-package com.alejandro.roomproject.modules.registeruser.interfaces
+package com.alejandro.roomproject.modules.users.registeruser.interfaces
 
 interface InterfaceRegister {
     fun registerData(

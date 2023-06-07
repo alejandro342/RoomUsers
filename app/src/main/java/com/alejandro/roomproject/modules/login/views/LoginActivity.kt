@@ -21,6 +21,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         mBinding!!.registerAccount.setOnClickListener(this)
         mBinding!!.forgotMyDetails.setOnClickListener(this)
 
+
     }
 
 

@@ -10,16 +10,19 @@ import com.alejandro.roomproject.data.entity.AppDatabase
 import com.alejandro.roomproject.extenciones.myToast
 import com.alejandro.roomproject.modules.login.interfaces.InterfaceLogin
 import com.alejandro.roomproject.modules.menu.view.MenuActivity
-import com.alejandro.roomproject.modules.registeruser.views.RegisterUsersActivity
+import com.alejandro.roomproject.modules.users.registeruser.views.RegisterUsersActivity
+
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
-class PresenterLogin(var mContext: Context) : InterfaceLogin, BasePresenterUser(), CoroutineScope {
+class PresenterLogin(private var mContext: Context) : InterfaceLogin, BasePresenterUser(),
+    CoroutineScope {
 
     override val coroutineContext: CoroutineContext = Dispatchers.IO
+
 
     //Room
     var room: AppDatabase
@@ -55,6 +58,7 @@ class PresenterLogin(var mContext: Context) : InterfaceLogin, BasePresenterUser(
             withContext(Dispatchers.Main) {
                 if (user != null) {
                     loginSuccessful()
+
                 } else {
                     Toast.makeText(
                         mContext,

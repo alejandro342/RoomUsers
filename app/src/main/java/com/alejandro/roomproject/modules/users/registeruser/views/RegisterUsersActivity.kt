@@ -1,4 +1,4 @@
-package com.alejandro.roomproject.modules.registeruser.views
+package com.alejandro.roomproject.modules.users.registeruser.views
 
 
 import androidx.appcompat.app.AppCompatActivity
@@ -6,13 +6,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentManager
 import com.alejandro.roomproject.R
 import com.alejandro.roomproject.databinding.ActivityRegisterUsersBinding
 import com.alejandro.roomproject.dialogs.saveuser.DialogSaveUser
-import com.alejandro.roomproject.models.Users
-import com.alejandro.roomproject.modules.registeruser.interfaces.InterfaceRegister
-import com.alejandro.roomproject.modules.registeruser.presenter.RegisterPresenter
+import com.alejandro.roomproject.modules.users.registeruser.interfaces.InterfaceRegister
+import com.alejandro.roomproject.modules.users.registeruser.presenter.RegisterPresenter
 
 class RegisterUsersActivity : AppCompatActivity(), View.OnClickListener, InterfaceRegister.dialog {
 

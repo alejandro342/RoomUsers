@@ -13,4 +13,9 @@ data class Users(
     var email: String,
     var password: String,
     var isConnected: Boolean
-)
+){
+    override fun toString(): String {
+        return "Users(usuario='$usuario', name='$name', email='$email', password='$password', isConnected=$isConnected)"
+    }
+
+}

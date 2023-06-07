@@ -1,4 +1,4 @@
-package com.alejandro.roomproject.modules.users.interfaces
+package com.alejandro.roomproject.modules.users.informationusers.interfaces
 
 import com.alejandro.roomproject.models.Users
 

@@ -1,4 +1,4 @@
-package com.alejandro.roomproject.modules.users.views.adapter
+package com.alejandro.roomproject.modules.users.informationusers.views.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.alejandro.roomproject.R
 import com.alejandro.roomproject.models.Users
-import com.alejandro.roomproject.modules.users.interfaces.InterfaceUsers
+import com.alejandro.roomproject.modules.users.informationusers.interfaces.InterfaceUsers
 import com.squareup.picasso.Picasso
 
 class AdapterUsers(val mUserList: MutableList<Users>, private val itemClickListener: InterfaceUsers) :
