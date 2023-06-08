@@ -15,6 +15,9 @@
     <string name="text_error_save_user">Error al guardar usuario</string>
     <string name="txt_close_session_dialog">¿Desea cerrar su sesión?</string>
 
+    <!--Toast-->
+    <string name="textErrorEmailAndPassword">Correo o contraseña incorrectos</string>
+
     <string name="text_charge_password">Su contraseña se cambio</string>
     <string name="text_error_change_password">Error al actualizar contraseña</string>
 

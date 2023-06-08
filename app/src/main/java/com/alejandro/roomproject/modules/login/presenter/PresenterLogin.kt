@@ -65,16 +65,12 @@ class PresenterLogin(private var mContext: Context) : InterfaceLogin, BasePresen
         launch(Dispatchers.IO) {
             val user = userDao.loginUser(email, password)
             withContext(Dispatchers.Main) {
-                if (user != null) {
-                    saveSession(user.toJson())
-                    loginSuccessful()
-                } else {
-                    Toast.makeText(
-                        mContext,
-                        "El correo o la contraseña esta mal",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+                    if (user != null) {
+                        saveSession(user.toJson())
+                        loginSuccessful()
+                    } else {
+                        mContext.myToast(R.string.textErrorEmailAndPassword)
+                    }
             }
         }
     }

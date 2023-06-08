@@ -7,7 +7,7 @@ import com.alejandro.roomproject.data.entity.AppDatabase
 
 class RoomDataBase private constructor(context: Context) {
 
-    private val miBaseDeDatos: AppDatabase = Room.databaseBuilder(
+    private val myBD: AppDatabase = Room.databaseBuilder(
         context.applicationContext,
         AppDatabase::class.java,
         "my_database"
@@ -15,15 +15,15 @@ class RoomDataBase private constructor(context: Context) {
 
     companion object {
         @Volatile
-        private var INSTANCE: RoomDataBase? = null
+        private var ROOMDB: RoomDataBase? = null
 
         fun getInstance(context: Context): RoomDataBase =
-            INSTANCE ?: synchronized(this) {
-                INSTANCE ?: RoomDataBase(context).also { INSTANCE = it }
+            ROOMDB ?: synchronized(this) {
+                ROOMDB ?: RoomDataBase(context).also { ROOMDB = it }
             }
     }
 
     fun getMiBaseDeDatos(): AppDatabase {
-        return miBaseDeDatos
+        return myBD
     }
 }

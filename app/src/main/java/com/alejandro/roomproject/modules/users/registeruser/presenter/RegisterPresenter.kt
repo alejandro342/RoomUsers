@@ -1,6 +1,7 @@
 package com.alejandro.roomproject.modules.users.registeruser.presenter
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Room
 import com.alejandro.roomproject.basepresenter.BasePresenterUser
 import com.alejandro.roomproject.data.entity.AppDatabase
@@ -11,6 +12,7 @@ import com.alejandro.roomproject.modules.users.registeruser.interfaces.Interface
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
 
@@ -53,11 +55,8 @@ class RegisterPresenter(private var mContext: Context, var mDialog: InterfaceReg
             mContext.myToast("Campo repetir contraseña vacio")
             return false
         } else if (password.equals(repeatPassword)) {
-
             mUser = Users(user, name, email, password, true)
-            addUser(miBD, mUser)
-            mDialog.showDialog()
-            mContext.myToast("Usuario creado correctamente")
+            verifyEmailAndUser(miBD, mUser)
 
         } else {
             mContext.myToast("las contraseñas no son iguales")
@@ -68,6 +67,25 @@ class RegisterPresenter(private var mContext: Context, var mDialog: InterfaceReg
     private fun addUser(room: AppDatabase, user: Users) {
         launch(Dispatchers.IO) {
             room.userDao().registerUser(user)
+        }
+    }
+
+    fun verifyEmailAndUser(room: AppDatabase, user: Users) {
+        val emailD = mUser.email
+        val usuario = mUser.usuario
+        launch(Dispatchers.IO) {
+            val mQuantityRegister = room.userDao().verifyEmailAndUser(emailD, usuario)
+            if (mQuantityRegister > 0) {
+                withContext(Dispatchers.Main) {
+                    mContext.myToast("El correo o usuario ya estan registrados")
+                }
+            } else {
+                addUser(room, user)
+                withContext(Dispatchers.Main) {
+                    mDialog.showDialog()
+                }
+
+            }
         }
     }
 

@@ -16,4 +16,7 @@ interface UsuariosDao {
 
     @Query("SELECT * FROM users WHERE email = :email AND password = :password")
     suspend fun loginUser(email: String, password: String): Users?
+
+    @Query("SELECT COUNT(*) FROM users WHERE email = :email OR usuario =:usuario")
+     suspend fun verifyEmailAndUser(email: String, usuario:String): Int
 }
