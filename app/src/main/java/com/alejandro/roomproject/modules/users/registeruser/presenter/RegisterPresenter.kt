@@ -16,17 +16,11 @@ import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
 
-class RegisterPresenter(private var mContext: Context, var mDialog: InterfaceRegister.dialog) :
-    InterfaceRegister, BasePresenterUser(),
+class RegisterPresenter(mContext: Context, var mDialog: InterfaceRegister.dialog) :
+    InterfaceRegister, BasePresenterUser(mContext),
     CoroutineScope {
 
     override val coroutineContext: CoroutineContext = Dispatchers.IO
-
-    //Room
-    private val miRoomDB = RoomDataBase.getInstance(mContext.applicationContext)
-    private val miBD = miRoomDB.getMiBaseDeDatos()
-
-    lateinit var mUser: Users
 
     override fun registerData(
         user: String,
@@ -37,29 +31,29 @@ class RegisterPresenter(private var mContext: Context, var mDialog: InterfaceReg
         status: Boolean
     ): Boolean {
         if (user.isEmpty()) {
-            mContext.myToast("Campo usuario vacio")
+            mContext?.myToast("Campo usuario vacio")
             return false
         } else if (name.isEmpty()) {
-            mContext.myToast("Campo nombre vacio")
+            mContext?.myToast("Campo nombre vacio")
             return false
         } else if (email.isEmpty()) {
-            mContext.myToast("Campo correo vacio")
+            mContext?.myToast("Campo correo vacio")
             return false
         } else if (!email.mValidateEmail()) {
-            mContext.myToast("Correo no valido")
+            mContext?.myToast("Correo no valido")
             return false
         } else if (password.isEmpty()) {
-            mContext.myToast("Campo contraseña vacio")
+            mContext?.myToast("Campo contraseña vacio")
             return false
         } else if (repeatPassword.isEmpty()) {
-            mContext.myToast("Campo repetir contraseña vacio")
+            mContext?.myToast("Campo repetir contraseña vacio")
             return false
         } else if (password.equals(repeatPassword)) {
             mUser = Users(user, name, email, password, true)
-            verifyEmailAndUser(miBD, mUser)
+            verifyEmailAndUser(miBD, mUser!!)
 
         } else {
-            mContext.myToast("las contraseñas no son iguales")
+            mContext?.myToast("las contraseñas no son iguales")
         }
         return true
     }
@@ -70,23 +64,21 @@ class RegisterPresenter(private var mContext: Context, var mDialog: InterfaceReg
         }
     }
 
-    fun verifyEmailAndUser(room: AppDatabase, user: Users) {
-        val emailD = mUser.email
-        val usuario = mUser.usuario
+    private fun verifyEmailAndUser(room: AppDatabase, user: Users) {
+        val emailD = mUser!!.email
+        val usuario = mUser!!.usuario
         launch(Dispatchers.IO) {
             val mQuantityRegister = room.userDao().verifyEmailAndUser(emailD, usuario)
             if (mQuantityRegister > 0) {
                 withContext(Dispatchers.Main) {
-                    mContext.myToast("El correo o usuario ya estan registrados")
+                    mContext?.myToast("El correo o usuario ya estan registrados")
                 }
             } else {
                 addUser(room, user)
                 withContext(Dispatchers.Main) {
                     mDialog.showDialog()
                 }
-
             }
         }
     }
-
 }

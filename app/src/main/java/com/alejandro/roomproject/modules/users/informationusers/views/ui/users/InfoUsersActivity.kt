@@ -50,8 +50,7 @@ class InfoUsersActivity : AppCompatActivity(), InterfaceUsers {
 
     fun getUsers(room: AppDatabase) {
         lifecycleScope.launch(Dispatchers.IO) {
-            listUsers = room.userDao().getUsuarios()
-            Log.d("LOLOL", "${listUsers}")
+            listUsers = room.userDao().getUsers()
             adapterUsers = AdapterUsers(listUsers, this@InfoUsersActivity)
             mBinding!!.RcvUsers.adapter = adapterUsers
         }
@@ -63,7 +62,7 @@ class InfoUsersActivity : AppCompatActivity(), InterfaceUsers {
         mBinding!!.ViewNameUser.text = user.name
         mBinding!!.TextEmailUser.text = user.email
 
-        if (user.isConnected == true) {
+        if (user.isConnected) {
             mBinding!!.mStatusUser.text = "conectado"
         } else {
             mBinding!!.mStatusUser.text = "desconectado"

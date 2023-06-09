@@ -9,11 +9,12 @@ import androidx.core.content.ContextCompat
 import com.alejandro.roomproject.R
 import com.alejandro.roomproject.databinding.ActivityProfileUserBinding
 import com.alejandro.roomproject.dialogs.closesession.DialogCloseSession
-import com.alejandro.roomproject.modules.users.profileuser.interfaces.InterfaceProfileUser
 import com.alejandro.roomproject.modules.users.profileuser.presenter.PresenterProfileUser
+import com.alejandro.roomproject.modules.users.profileuser.interfaces.CallbackProfileUser
 
 
-class ProfileUserActivity : AppCompatActivity(), View.OnClickListener, InterfaceProfileUser {
+class ProfileUserActivity : AppCompatActivity(), View.OnClickListener,
+    CallbackProfileUser {
     private var mBinding: ActivityProfileUserBinding? = null
     private var mToolbar: Toolbar? = null
     private var mPresenterProfileUser: PresenterProfileUser? = null
@@ -23,12 +24,13 @@ class ProfileUserActivity : AppCompatActivity(), View.OnClickListener, Interface
 
         mBinding = ActivityProfileUserBinding.inflate(layoutInflater)
         setContentView(mBinding!!.root)
-        mPresenterProfileUser = PresenterProfileUser(this, this)
+        mPresenterProfileUser = PresenterProfileUser(this)
         mBinding!!.btnEditPassword.setOnClickListener(this)
         mBinding!!.imgCloseSession.setOnClickListener(this)
         myToolbar()
 
         mPresenterProfileUser?.getUserFromSession()
+        mPresenterProfileUser?.setDataCallback(this)
         mPresenterProfileUser?.setDataUser()
     }
 
@@ -44,19 +46,29 @@ class ProfileUserActivity : AppCompatActivity(), View.OnClickListener, Interface
             mBinding!!.btnEditPassword -> {
                 mPresenterProfileUser?.gotoEditPassword()
             }
-            mBinding!!.imgCloseSession -> {showDialogCloseSession()}
+
+            mBinding!!.imgCloseSession -> {
+                showDialogCloseSession()
+            }
         }
     }
-    fun showDialogCloseSession(){
-        DialogCloseSession{closeSession->
+
+    private fun showDialogCloseSession() {
+        DialogCloseSession {
             mPresenterProfileUser?.closeSession()
-        }.show(supportFragmentManager,"dialog")
+        }.show(supportFragmentManager, "dialog")
     }
 
-    override fun setDataUser(name: String, user: String, email: String) {
+    override fun setDataUser(name: String, user: String, email: String, status: Boolean) {
         mBinding!!.textViewNameUserProfile.text = name
         mBinding!!.textViewNameUser.text = user
         mBinding!!.textViewEmailUser.text = email
-    }
 
+        if (status) {
+            mBinding!!.textViewStatusUser.text = "conectado"
+        } else {
+            mBinding!!.textViewStatusUser.text = "desconectado"
+        }
+
+    }
 }

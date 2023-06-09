@@ -9,7 +9,7 @@ import com.alejandro.roomproject.models.Users
 interface UsuariosDao {
 
     @Query("SELECT * FROM users")
-    suspend fun getUsuarios(): MutableList<Users>
+    suspend fun getUsers(): MutableList<Users>
 
     @Insert
     suspend fun registerUser(user: Users)
@@ -18,5 +18,11 @@ interface UsuariosDao {
     suspend fun loginUser(email: String, password: String): Users?
 
     @Query("SELECT COUNT(*) FROM users WHERE email = :email OR usuario =:usuario")
-     suspend fun verifyEmailAndUser(email: String, usuario:String): Int
+    suspend fun verifyEmailAndUser(email: String, usuario: String): Int
+
+    @Query("UPDATE users SET isConnected = :isConnected WHERE usuario= :usuario")
+    suspend fun updateStatus(usuario: String, isConnected: Boolean)
+
+    @Query("UPDATE users SET password = :password WHERE usuario= :usuario")
+    suspend fun updatePassword(usuario: String, password: String)
 }
