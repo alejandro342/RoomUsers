@@ -28,7 +28,8 @@ class RegisterPresenter(mContext: Context, var mDialog: InterfaceRegister.dialog
         email: String,
         password: String,
         repeatPassword: String,
-        status: Boolean
+        status: Boolean,
+        imageUser: String
     ): Boolean {
         if (user.isEmpty()) {
             mContext?.myToast("Campo usuario vacio")
@@ -48,9 +49,11 @@ class RegisterPresenter(mContext: Context, var mDialog: InterfaceRegister.dialog
         } else if (repeatPassword.isEmpty()) {
             mContext?.myToast("Campo repetir contraseña vacio")
             return false
-        } else if (password.equals(repeatPassword)) {
-            mUser = Users(user, name, email, password, true)
-            verifyEmailAndUser(miBD, mUser!!)
+        } else if (password == repeatPassword) {
+            if (imageUser.isEmpty() or imageUser.isNotEmpty()) {
+                mUser = Users(user, name, email, password, true, imageUser)
+                verifyEmailAndUser(miBD, mUser!!)
+            }
 
         } else {
             mContext?.myToast("las contraseñas no son iguales")

@@ -9,16 +9,16 @@ import com.alejandro.roomproject.modules.users.profileuser.views.ProfileUserActi
 class PresenterMenu(var mContext: Context) {
 
     fun goToRegister() {
-        val mIntem = Intent(mContext, RegisterUsersActivity::class.java)
-        mContext.startActivity(mIntem)
+        val mIntent = Intent(mContext, RegisterUsersActivity::class.java)
+        mContext.startActivity(mIntent)
     }
 
     fun goToInformation() {
-        val mIntem = Intent(mContext, InfoUsersActivity::class.java)
-        mContext.startActivity(mIntem)
+        val mIntent = Intent(mContext, InfoUsersActivity::class.java)
+        mContext.startActivity(mIntent)
     }
     fun goToProfile() {
-        val mIntem = Intent(mContext, ProfileUserActivity::class.java)
-        mContext.startActivity(mIntem)
+        val mIntent = Intent(mContext, ProfileUserActivity::class.java)
+        mContext.startActivity(mIntent)
     }
 }

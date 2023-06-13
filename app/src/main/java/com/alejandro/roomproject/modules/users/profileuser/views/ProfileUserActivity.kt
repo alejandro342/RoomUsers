@@ -1,23 +1,33 @@
 package com.alejandro.roomproject.modules.users.profileuser.views
 
 
+import android.app.Activity
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.alejandro.roomproject.R
 import com.alejandro.roomproject.databinding.ActivityProfileUserBinding
 import com.alejandro.roomproject.dialogs.closesession.DialogCloseSession
+import com.alejandro.roomproject.extenciones.myToast
 import com.alejandro.roomproject.modules.users.profileuser.presenter.PresenterProfileUser
 import com.alejandro.roomproject.modules.users.profileuser.interfaces.CallbackProfileUser
+import com.alejandro.roomproject.modules.users.profileuser.interfaces.InterfacePresenterProfile
+import com.github.dhaval2404.imagepicker.ImagePicker
+import java.io.File
 
 
 class ProfileUserActivity : AppCompatActivity(), View.OnClickListener,
-    CallbackProfileUser {
+    CallbackProfileUser, InterfacePresenterProfile {
     private var mBinding: ActivityProfileUserBinding? = null
     private var mToolbar: Toolbar? = null
     private var mPresenterProfileUser: PresenterProfileUser? = null
+
+    private var mImageFile: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +37,7 @@ class ProfileUserActivity : AppCompatActivity(), View.OnClickListener,
         mPresenterProfileUser = PresenterProfileUser(this)
         mBinding!!.btnEditPassword.setOnClickListener(this)
         mBinding!!.imgCloseSession.setOnClickListener(this)
+        mBinding!!.imgUpdateImageUser.setOnClickListener(this)
         myToolbar()
 
         mPresenterProfileUser?.getUserFromSession()
@@ -50,6 +61,10 @@ class ProfileUserActivity : AppCompatActivity(), View.OnClickListener,
             mBinding!!.imgCloseSession -> {
                 showDialogCloseSession()
             }
+
+            mBinding!!.imgUpdateImageUser -> {
+                selectImage()
+            }
         }
     }
 
@@ -70,5 +85,51 @@ class ProfileUserActivity : AppCompatActivity(), View.OnClickListener,
             mBinding!!.textViewStatusUser.text = "desconectado"
         }
 
+    }
+
+    private val mStarImageForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            //data que devuelve la imagen que seleccione el usuario
+            val data = result.data
+            //se crea un archivo
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    val mFieldUri = data?.data
+                    if (mFieldUri != null) {
+                        mBinding!!.ImgProfileUser.borderColor =
+                            ContextCompat.getColor(this, R.color.myColorGreen)
+                        mBinding!!.imgUpdateImageUser.borderColor =
+                            ContextCompat.getColor(this, R.color.myColorGreen)
+                        mImageFile = mFieldUri.path?.let { File(it) }
+                        imageSelected(mFieldUri)
+                    }
+                    mBinding!!.ImgProfileUser.setImageURI(mFieldUri)
+                }
+
+                ImagePicker.RESULT_ERROR -> {
+                    myToast(ImagePicker.getError(data))
+
+                }
+
+                else -> {
+                    myToast("Proceso cancelado")
+                }
+            }
+        }
+
+    private fun selectImage() {
+        ImagePicker.with(this)
+            .crop()
+            .compress(1024)
+            .maxResultSize(1080, 1080)
+            .createIntent { mIntent ->
+                mStarImageForResult.launch(mIntent)
+
+            }
+    }
+
+    override fun imageSelected(imageUri: Uri) {
+        mPresenterProfileUser?.processImage(imageUri)
     }
 }

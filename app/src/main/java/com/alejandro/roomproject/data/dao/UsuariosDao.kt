@@ -25,4 +25,8 @@ interface UsuariosDao {
 
     @Query("UPDATE users SET password = :password WHERE usuario= :usuario")
     suspend fun updatePassword(usuario: String, password: String)
+
+    @Query("UPDATE users SET imageUser = :imageUser WHERE usuario= :usuario")
+    suspend fun setImageUser(usuario: String, imageUser: String)
+
 }

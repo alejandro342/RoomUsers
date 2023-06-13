@@ -7,7 +7,8 @@ interface InterfaceRegister {
         email: String,
         password: String,
         repeatPassword: String,
-        status: Boolean
+        status: Boolean,
+        imageUser:String
     ): Boolean
 
     interface dialog {

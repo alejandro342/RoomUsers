@@ -14,3 +14,4 @@ fun Context.myToast(text: Int, length: Int = Toast.LENGTH_LONG) {
 fun Context.myToast(text: String, length: Int = Toast.LENGTH_LONG) {
     Toast.makeText(this, text, length).show()
 }
+

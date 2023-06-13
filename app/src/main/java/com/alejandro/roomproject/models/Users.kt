@@ -13,7 +13,8 @@ data class Users(
     @ColumnInfo(name = "name") var name: String,
     var email: String,
     var password: String,
-    var isConnected: Boolean
+    var isConnected: Boolean,
+    var imageUser: String
 ) {
     override fun toString(): String {
         return "Users(usuario='$usuario', name='$name', email='$email', password='$password', isConnected=$isConnected)"

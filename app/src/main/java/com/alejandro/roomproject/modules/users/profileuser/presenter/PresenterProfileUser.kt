@@ -2,8 +2,9 @@ package com.alejandro.roomproject.modules.users.profileuser.presenter
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import com.alejandro.roomproject.basepresenter.BasePresenterUser
-import com.alejandro.roomproject.data.roomdb.RoomDataBase
+import com.alejandro.roomproject.extenciones.myToast
 import com.alejandro.roomproject.modules.login.views.LoginActivity
 import com.alejandro.roomproject.modules.users.profileuser.interfaces.CallbackProfileUser
 import com.alejandro.roomproject.modules.users.updateduserpassword.views.UpdatedPasswordUserActivity
@@ -57,4 +58,9 @@ class PresenterProfileUser(mContext: Context) :
         mContext?.startActivity(mIntent)
     }
 
+    ///----------------------------------------
+
+fun processImage(imageUri:Uri){
+    mContext?.myToast("${imageUri}")
+}
 }

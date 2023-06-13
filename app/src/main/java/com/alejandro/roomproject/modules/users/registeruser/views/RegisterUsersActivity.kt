@@ -42,7 +42,8 @@ class RegisterUsersActivity : AppCompatActivity(), View.OnClickListener, Interfa
                 mBinding!!.editEmail.text.toString().trim(),
                 mBinding!!.editPassword.text.toString().trim(),
                 mBinding!!.editRepeatPassword.text.toString().trim(),
-                true
+                true,
+                mBinding!!.editImageUser.text.toString().trim()
             )
         }
     }
