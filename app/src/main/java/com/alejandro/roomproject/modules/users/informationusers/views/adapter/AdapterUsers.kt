@@ -38,9 +38,13 @@ class AdapterUsers(
                 ContextCompat.getColor(mContext, R.color.myColorOff)
         }
 
-        Picasso.get()
-            .load(user.imageUser)
-            .into(holder.mBinding.ImgItemUser)
+        if (user.imageUser.isNotEmpty()) {
+            Picasso.get()
+                .load(user.imageUser)
+                .into(holder.mBinding.ImgItemUser)
+        } else {
+            holder.mBinding.ImgItemUser.setImageResource(R.drawable.ic_person)
+        }
         holder.status(user)
 
         holder.itemView.setOnClickListener {

@@ -16,14 +16,14 @@ import com.alejandro.roomproject.dialogs.closesession.DialogCloseSession
 import com.alejandro.roomproject.extenciones.myToast
 import com.alejandro.roomproject.modules.users.profileuser.presenter.PresenterProfileUser
 import com.alejandro.roomproject.modules.users.profileuser.interfaces.CallbackProfileUser
-import com.alejandro.roomproject.modules.users.profileuser.interfaces.InterfacePresenterProfile
+import com.alejandro.roomproject.modules.users.profileuser.interfaces.InterfaceViewProfile
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.squareup.picasso.Picasso
 import java.io.File
 
 
 class ProfileUserActivity : AppCompatActivity(), View.OnClickListener,
-    CallbackProfileUser, InterfacePresenterProfile {
+    CallbackProfileUser, InterfaceViewProfile {
     private var mBinding: ActivityProfileUserBinding? = null
     private var mToolbar: Toolbar? = null
     private var mPresenterProfileUser: PresenterProfileUser? = null

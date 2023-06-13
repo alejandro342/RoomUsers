@@ -6,10 +6,13 @@ import android.net.Uri
 import android.util.Log
 import com.alejandro.roomproject.basepresenter.BasePresenterUser
 import com.alejandro.roomproject.extenciones.myToast
+import com.alejandro.roomproject.models.Users
 import com.alejandro.roomproject.modules.login.views.LoginActivity
 import com.alejandro.roomproject.modules.users.profileuser.interfaces.CallbackProfileUser
+import com.alejandro.roomproject.modules.users.profileuser.interfaces.InterfaceViewProfile
 import com.alejandro.roomproject.modules.users.updateduserpassword.views.UpdatedPasswordUserActivity
 import com.alejandro.roomproject.utils.SharedPref
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -43,7 +46,6 @@ class PresenterProfileUser(mContext: Context) :
         val email = mUser?.email
         val status = mUser?.isConnected
         val imageUser = mUser?.imageUser
-
 
         if (name != null) {
             if (user != null) {
@@ -79,5 +81,4 @@ class PresenterProfileUser(mContext: Context) :
             }
         }
     }
-
 }

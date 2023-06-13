@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.alejandro.roomproject.R
 import com.alejandro.roomproject.data.entity.AppDatabase
+import com.alejandro.roomproject.data.roomdb.RoomDataBase
 import com.alejandro.roomproject.databinding.ActivityInfoUsersBinding
 import com.alejandro.roomproject.extenciones.myToast
 import com.alejandro.roomproject.models.Users
@@ -22,13 +23,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class InfoUsersActivity : AppCompatActivity(), InterfaceUsers {
+
     private var mBinding: ActivityInfoUsersBinding? = null
     var listUsers: MutableList<Users> = mutableListOf()
     lateinit var adapterUsers: AdapterUsers
     private var mToolbar: Toolbar? = null
 
     //Room
-    lateinit var room: AppDatabase
+    private val miRoomDB = RoomDataBase.getInstance(this)
+    private val miBD = miRoomDB.getMiBaseDeDatos()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,12 +40,11 @@ class InfoUsersActivity : AppCompatActivity(), InterfaceUsers {
 
         mBinding!!.RcvUsers.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        room = Room.databaseBuilder(this, AppDatabase::class.java, "my_database").build()
-        getUsers(room)
+        getUsers(miBD)
         toolbar()
     }
 
-    fun toolbar() {
+    private fun toolbar() {
         mToolbar = findViewById(R.id.my_toolbar)
         mToolbar?.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
         mToolbar?.title = "Información"
@@ -52,7 +54,7 @@ class InfoUsersActivity : AppCompatActivity(), InterfaceUsers {
     private fun getUsers(room: AppDatabase) {
         lifecycleScope.launch(Dispatchers.IO) {
             listUsers = room.userDao().getUsers()
-            adapterUsers = AdapterUsers(listUsers, this@InfoUsersActivity,this@InfoUsersActivity)
+            adapterUsers = AdapterUsers(listUsers, this@InfoUsersActivity, this@InfoUsersActivity)
             mBinding!!.RcvUsers.adapter = adapterUsers
         }
     }
@@ -60,10 +62,14 @@ class InfoUsersActivity : AppCompatActivity(), InterfaceUsers {
 
     @SuppressLint("SetTextI18n")
     override fun onItemClick(user: Users) {
-        Picasso.get()
-            .load(user.imageUser)
-            .error(R.drawable.ic_person)
-            .into(mBinding!!.imgUserInformation)
+
+        if (user.imageUser.isNotEmpty()) {
+            Picasso.get()
+                .load(user.imageUser)
+                .into(mBinding!!.imgUserInformation)
+        } else {
+            mBinding!!.imgUserInformation.setImageResource(R.drawable.ic_person)
+        }
 
         mBinding!!.ViewNameUser.text = user.name
         mBinding!!.TextEmailUser.text = user.email
@@ -74,40 +80,4 @@ class InfoUsersActivity : AppCompatActivity(), InterfaceUsers {
             mBinding!!.mStatusUser.text = "desconectado"
         }
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

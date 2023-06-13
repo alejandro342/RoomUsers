@@ -26,17 +26,6 @@ class PresenterLogin(mContext: Context) : InterfaceLogin, BasePresenterUser(mCon
 
     override val coroutineContext: CoroutineContext = Dispatchers.IO
 
-
-    private var gson: Gson? = null
-
-    init {
-        sharedPref = SharedPref(mContext)
-        gson = Gson()
-
-        mUser = gson?.fromJson(sharedPref?.getInformation("user"), Users::class.java)
-
-    }
-
     override fun loginUser(email: String, password: String): Boolean {
 
         if (email.isEmpty()) {
@@ -54,18 +43,11 @@ class PresenterLogin(mContext: Context) : InterfaceLogin, BasePresenterUser(mCon
         return true
     }
 
-    override fun saveSession(infoSession: String) {
-
-        val user = gson?.fromJson(infoSession, Users::class.java)
-        sharedPref?.saveSession("user", user!!)
-        loginSuccessful()
-    }
-
     fun login(email: String, password: String) {
         launch(Dispatchers.IO) {
             val user = userDao.loginUser(email, password)
             if (user != null) {
-                saveSession(user.toJson())
+                setStatus(user)
                 saveSession(user.toJson())
                 loginSuccessful()
             } else {
@@ -109,5 +91,15 @@ class PresenterLogin(mContext: Context) : InterfaceLogin, BasePresenterUser(mCon
     private fun login() {
         val mIntent = Intent(mContext, LoginActivity::class.java)
         mContext?.startActivity(mIntent)
+    }
+
+    private fun setStatus(user: Users) {
+        updateStatus(user.usuario, true)
+    }
+
+    private fun updateStatus(usuario: String, isConnected: Boolean) {
+        launch {
+            userDao.updateStatus(usuario, isConnected)
+        }
     }
 }

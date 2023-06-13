@@ -2,7 +2,7 @@ package com.alejandro.roomproject.modules.users.profileuser.interfaces
 
 import android.net.Uri
 
-interface InterfacePresenterProfile {
+interface InterfaceViewProfile {
 
     fun imageSelected(imageUri: Uri)
 }
