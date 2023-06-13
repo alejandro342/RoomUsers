@@ -8,7 +8,7 @@
     <color name="myColorRed">#FD5D47</color>
     <color name="myColorGreen">#00D099</color>
     <color name="myColorOrange">#F69110</color>
-    <color name="transparente">#00000000</color>
+    <color name="transparent">#00000000</color>
     <color name="myColorBackgroundText">#A6A4A1</color>
     <color name="myColorRedAlert">#FF0101</color>
     <color name="myColorOff">#706E6E</color>

@@ -61,11 +61,12 @@
                     android:textStyle="bold" />
 
                 <ImageView
+                    android:id="@+id/imgUserInformation"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_marginHorizontal="60dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/github"/>
+                    android:src="@drawable/ic_person"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"

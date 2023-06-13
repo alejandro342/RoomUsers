@@ -18,6 +18,7 @@ import com.alejandro.roomproject.modules.users.profileuser.presenter.PresenterPr
 import com.alejandro.roomproject.modules.users.profileuser.interfaces.CallbackProfileUser
 import com.alejandro.roomproject.modules.users.profileuser.interfaces.InterfacePresenterProfile
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.squareup.picasso.Picasso
 import java.io.File
 
 
@@ -38,6 +39,7 @@ class ProfileUserActivity : AppCompatActivity(), View.OnClickListener,
         mBinding!!.btnEditPassword.setOnClickListener(this)
         mBinding!!.imgCloseSession.setOnClickListener(this)
         mBinding!!.imgUpdateImageUser.setOnClickListener(this)
+        mBinding!!.btnSaveImageUser.setOnClickListener(this)
         myToolbar()
 
         mPresenterProfileUser?.getUserFromSession()
@@ -65,6 +67,10 @@ class ProfileUserActivity : AppCompatActivity(), View.OnClickListener,
             mBinding!!.imgUpdateImageUser -> {
                 selectImage()
             }
+
+            mBinding!!.btnSaveImageUser -> {
+
+            }
         }
     }
 
@@ -74,7 +80,13 @@ class ProfileUserActivity : AppCompatActivity(), View.OnClickListener,
         }.show(supportFragmentManager, "dialog")
     }
 
-    override fun setDataUser(name: String, user: String, email: String, status: Boolean) {
+    override fun setDataUser(
+        name: String,
+        user: String,
+        email: String,
+        status: Boolean,
+        imageUser: String
+    ) {
         mBinding!!.textViewNameUserProfile.text = name
         mBinding!!.textViewNameUser.text = user
         mBinding!!.textViewEmailUser.text = email
@@ -84,6 +96,10 @@ class ProfileUserActivity : AppCompatActivity(), View.OnClickListener,
         } else {
             mBinding!!.textViewStatusUser.text = "desconectado"
         }
+        Picasso.get()
+            .load(imageUser)
+            .error(R.drawable.ic_person)
+            .into(mBinding!!.ImgProfileUser)
 
     }
 

@@ -58,7 +58,6 @@ class PresenterLogin(mContext: Context) : InterfaceLogin, BasePresenterUser(mCon
 
         val user = gson?.fromJson(infoSession, Users::class.java)
         sharedPref?.saveSession("user", user!!)
-
         loginSuccessful()
     }
 
@@ -67,6 +66,7 @@ class PresenterLogin(mContext: Context) : InterfaceLogin, BasePresenterUser(mCon
             val user = userDao.loginUser(email, password)
             if (user != null) {
                 saveSession(user.toJson())
+                saveSession(user.toJson())
                 loginSuccessful()
             } else {
                 withContext(Dispatchers.Main) {
@@ -74,6 +74,7 @@ class PresenterLogin(mContext: Context) : InterfaceLogin, BasePresenterUser(mCon
                 }
             }
         }
+
     }
 
     fun getFromSession() {
@@ -109,5 +110,4 @@ class PresenterLogin(mContext: Context) : InterfaceLogin, BasePresenterUser(mCon
         val mIntent = Intent(mContext, LoginActivity::class.java)
         mContext?.startActivity(mIntent)
     }
-
 }

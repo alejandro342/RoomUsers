@@ -17,6 +17,7 @@ import com.alejandro.roomproject.models.Users
 import com.alejandro.roomproject.modules.users.informationusers.interfaces.InterfaceUsers
 import com.alejandro.roomproject.modules.users.informationusers.views.adapter.AdapterUsers
 import com.google.gson.Gson
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -48,10 +49,10 @@ class InfoUsersActivity : AppCompatActivity(), InterfaceUsers {
         mToolbar?.titleMarginStart = 350
     }
 
-    fun getUsers(room: AppDatabase) {
+    private fun getUsers(room: AppDatabase) {
         lifecycleScope.launch(Dispatchers.IO) {
             listUsers = room.userDao().getUsers()
-            adapterUsers = AdapterUsers(listUsers, this@InfoUsersActivity)
+            adapterUsers = AdapterUsers(listUsers, this@InfoUsersActivity,this@InfoUsersActivity)
             mBinding!!.RcvUsers.adapter = adapterUsers
         }
     }
@@ -59,6 +60,11 @@ class InfoUsersActivity : AppCompatActivity(), InterfaceUsers {
 
     @SuppressLint("SetTextI18n")
     override fun onItemClick(user: Users) {
+        Picasso.get()
+            .load(user.imageUser)
+            .error(R.drawable.ic_person)
+            .into(mBinding!!.imgUserInformation)
+
         mBinding!!.ViewNameUser.text = user.name
         mBinding!!.TextEmailUser.text = user.email
 

@@ -3,6 +3,7 @@ package com.alejandro.roomproject.modules.users.profileuser.presenter
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import com.alejandro.roomproject.basepresenter.BasePresenterUser
 import com.alejandro.roomproject.extenciones.myToast
 import com.alejandro.roomproject.modules.login.views.LoginActivity
@@ -12,6 +13,7 @@ import com.alejandro.roomproject.utils.SharedPref
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
 class PresenterProfileUser(mContext: Context) :
@@ -27,7 +29,6 @@ class PresenterProfileUser(mContext: Context) :
     fun upDateStatus(usuario: String, isConnected: Boolean) {
         launch {
             userDao.updateStatus(usuario, isConnected)
-            closeSession()
         }
     }
 
@@ -41,10 +42,17 @@ class PresenterProfileUser(mContext: Context) :
         val user = mUser?.usuario
         val email = mUser?.email
         val status = mUser?.isConnected
+        val imageUser = mUser?.imageUser
+
+
         if (name != null) {
             if (user != null) {
                 if (email != null) {
-                    mCallbackProfile?.setDataUser(name, user, email, status!!)
+                    if (status != null) {
+                        if (imageUser != null) {
+                            mCallbackProfile?.setDataUser(name, user, email, status, imageUser)
+                        }
+                    }
                 }
             }
         }
@@ -58,9 +66,18 @@ class PresenterProfileUser(mContext: Context) :
         mContext?.startActivity(mIntent)
     }
 
-    ///----------------------------------------
 
-fun processImage(imageUri:Uri){
-    mContext?.myToast("${imageUri}")
-}
+    fun processImage(imageUri: Uri) {
+        launch {
+            val uri: Uri = imageUri
+            val uriString: String = uri.toString()
+            try {
+                userDao.setImageUser(mUser!!.usuario, uriString)
+                withContext(Dispatchers.Main) { mContext?.myToast("Imagen guardada") }
+            } catch (e: Exception) {
+                Log.d("Error", "${e.message}")
+            }
+        }
+    }
+
 }

@@ -1,16 +1,23 @@
 package com.alejandro.roomproject.modules.users.informationusers.views.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.alejandro.roomproject.R
+import com.alejandro.roomproject.databinding.ItemUsersBinding
 import com.alejandro.roomproject.models.Users
 import com.alejandro.roomproject.modules.users.informationusers.interfaces.InterfaceUsers
 import com.squareup.picasso.Picasso
 
-class AdapterUsers(val mUserList: MutableList<Users>, private val itemClickListener: InterfaceUsers) :
+class AdapterUsers(
+    private val mUserList: MutableList<Users>,
+    private val itemClickListener: InterfaceUsers,
+    private val mContext: Context
+) :
     RecyclerView.Adapter<AdapterUsers.UsersViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsersViewHolder {
@@ -22,9 +29,18 @@ class AdapterUsers(val mUserList: MutableList<Users>, private val itemClickListe
 
     override fun onBindViewHolder(holder: UsersViewHolder, position: Int) {
         val user = mUserList[position]
+
+        if (user.isConnected) {
+            holder.mBinding.ImgItemUser.borderColor =
+                ContextCompat.getColor(mContext, R.color.myColorOn)
+        } else {
+            holder.mBinding.ImgItemUser.borderColor =
+                ContextCompat.getColor(mContext, R.color.myColorOff)
+        }
+
         Picasso.get()
-            .load(R.drawable.shape_users)
-            .into(holder.imgUser)
+            .load(user.imageUser)
+            .into(holder.mBinding.ImgItemUser)
         holder.status(user)
 
         holder.itemView.setOnClickListener {
@@ -36,18 +52,15 @@ class AdapterUsers(val mUserList: MutableList<Users>, private val itemClickListe
 
 
     class UsersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var imgUser: ImageView? = null
-        var mViewStatus: ImageView? = null
 
-        init {
-            imgUser = itemView.findViewById(R.id.Img_Item_User)
-            mViewStatus = itemView.findViewById(R.id.mView_Item_Status)
-        }
-        fun status(statusUSer:Users){
-            if (statusUSer.isConnected){
-                mViewStatus?.setImageResource(R.drawable.shape_status_users_green)
-            }else{
-                mViewStatus?.setImageResource(R.drawable.shape_status_users)
+        var mBinding = ItemUsersBinding.bind(itemView)
+
+
+        fun status(statusUSer: Users) {
+            if (statusUSer.isConnected) {
+                mBinding.mViewItemStatus.setImageResource(R.drawable.shape_status_users_green)
+            } else {
+                mBinding.mViewItemStatus.setImageResource(R.drawable.shape_status_users)
             }
         }
     }

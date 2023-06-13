@@ -30,8 +30,7 @@ class SharedPref(activity: Context) {
     }
 
     fun getInformation(key: String): String? {
-        val information = prefs?.getString(key, "")
-        return information
+        return prefs?.getString(key, "")
     }
 
 
