@@ -1,6 +1,7 @@
 package com.alejandro.roomproject.data.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.alejandro.roomproject.models.Users
@@ -28,5 +29,9 @@ interface UsuariosDao {
 
     @Query("UPDATE users SET imageUser = :imageUser WHERE usuario= :usuario")
     suspend fun setImageUser(usuario: String, imageUser: String)
+
+    @Delete
+    suspend fun deleteUser(user: Users)
+
 
 }

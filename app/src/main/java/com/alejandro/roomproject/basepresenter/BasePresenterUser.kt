@@ -3,7 +3,6 @@ package com.alejandro.roomproject.basepresenter
 import android.content.Context
 import android.text.TextUtils
 import com.alejandro.roomproject.data.roomdb.RoomDataBase
-import com.alejandro.roomproject.extenciones.myToast
 import com.alejandro.roomproject.models.Users
 import com.alejandro.roomproject.utils.SharedPref
 import com.google.gson.Gson
@@ -39,6 +38,7 @@ open class BasePresenterUser(mContext: Context) {
             mUser = gson.fromJson(sharedPref?.getInformation("user"), Users::class.java)
         }
     }
+
     fun saveSession(infoSession: String) {
 
         val user = gson?.fromJson(infoSession, Users::class.java)

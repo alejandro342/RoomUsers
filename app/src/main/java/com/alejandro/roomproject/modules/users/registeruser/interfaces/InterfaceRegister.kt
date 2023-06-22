@@ -8,7 +8,7 @@ interface InterfaceRegister {
         password: String,
         repeatPassword: String,
         status: Boolean,
-        imageUser:String
+        imageUser: String
     ): Boolean
 
     interface dialog {

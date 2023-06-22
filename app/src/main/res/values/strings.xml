@@ -3,6 +3,7 @@
 
     <!--text general-->
     <string name="txt_user_general">Usuario:</string>
+    <string name="txt_text_blank">----</string>
     <!--hin-->
     <string name="txt_hin_new_password_general">Nueva contraseña</string>
     <string name="txt_hin_repeat_password_general">Repetir contraseña</string>
@@ -23,6 +24,11 @@
     <string name="text_error_save_user">Error al guardar usuario</string>
     <string name="txt_close_session_dialog">¿Desea cerrar su sesión?</string>
 
+    <string name="txtDeleteUser">¿Esta seguro de eliminar su usuario?</string>
+    <string name="btnYes">Si</string>
+    <string name="btnNo">No</string>
+
+
     <!--Toast-->
     <string name="textErrorEmailAndPassword">Correo o contraseña incorrectos</string>
 
@@ -33,5 +39,15 @@
     <string name="btn_text_accept">ACEPTAR</string>
     <string name="btn_text_confirm_change_password">Confirmar</string>
     <string name="btn_close_session_cancel">CANCELAR</string>
+
+
+    <!--Text_InfoUser-->
+    <string name="textInformation">Información</string>
+    <string name="textName">Nombre:</string>
+    <string name="textEmail">Correo:</string>
+    <string name="textStatus">Estado:</string>
+    <string name="textDelete">Eliminar</string>
+    <string name="textUpdate">Editar</string>
+
 
 </resources>

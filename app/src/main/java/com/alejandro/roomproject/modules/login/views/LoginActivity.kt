@@ -1,11 +1,10 @@
 package com.alejandro.roomproject.modules.login.views
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.alejandro.roomproject.databinding.ActivityLoginBinding
 import com.alejandro.roomproject.modules.login.presenter.PresenterLogin
-import com.google.gson.Gson
 
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {

@@ -1,8 +1,8 @@
 package com.alejandro.roomproject.modules.users.updateduserpassword.views
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.alejandro.roomproject.R
@@ -13,7 +13,7 @@ import com.alejandro.roomproject.modules.users.updateduserpassword.intefaces.Int
 import com.alejandro.roomproject.modules.users.updateduserpassword.presenter.PresenterUpdatedPassword
 
 class UpdatedPasswordUserActivity : AppCompatActivity(), View.OnClickListener,
-    CallbackUserUpdatedPassword,InterfaceChangePassword.MyDialog {
+    CallbackUserUpdatedPassword, InterfaceChangePassword.MyDialog {
     private var mBinding: ActivityUpdatedPasswordUserBinding? = null
 
     private var mPresenterUpdatedPassword: PresenterUpdatedPassword? = null
@@ -22,7 +22,7 @@ class UpdatedPasswordUserActivity : AppCompatActivity(), View.OnClickListener,
         super.onCreate(savedInstanceState)
         mBinding = ActivityUpdatedPasswordUserBinding.inflate(layoutInflater)
         setContentView(mBinding!!.root)
-        mPresenterUpdatedPassword = PresenterUpdatedPassword(this,this)
+        mPresenterUpdatedPassword = PresenterUpdatedPassword(this, this)
 
         mPresenterUpdatedPassword?.getUserFromSession()
         mPresenterUpdatedPassword?.setUserCallback(this)

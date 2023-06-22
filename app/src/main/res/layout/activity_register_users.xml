@@ -31,7 +31,7 @@
                 android:id="@+id/editImageUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout"
@@ -154,6 +154,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="@color/white"/>
+        app:strokeColor="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

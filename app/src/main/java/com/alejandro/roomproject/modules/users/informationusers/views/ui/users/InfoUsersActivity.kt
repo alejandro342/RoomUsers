@@ -1,23 +1,19 @@
 package com.alejandro.roomproject.modules.users.informationusers.views.ui.users
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.Room
 import com.alejandro.roomproject.R
 import com.alejandro.roomproject.data.entity.AppDatabase
 import com.alejandro.roomproject.data.roomdb.RoomDataBase
 import com.alejandro.roomproject.databinding.ActivityInfoUsersBinding
-import com.alejandro.roomproject.extenciones.myToast
 import com.alejandro.roomproject.models.Users
 import com.alejandro.roomproject.modules.users.informationusers.interfaces.InterfaceUsers
 import com.alejandro.roomproject.modules.users.informationusers.views.adapter.AdapterUsers
-import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

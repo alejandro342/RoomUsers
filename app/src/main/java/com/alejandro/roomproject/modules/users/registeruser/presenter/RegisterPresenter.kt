@@ -1,11 +1,8 @@
 package com.alejandro.roomproject.modules.users.registeruser.presenter
 
 import android.content.Context
-import android.util.Log
-import androidx.room.Room
 import com.alejandro.roomproject.basepresenter.BasePresenterUser
 import com.alejandro.roomproject.data.entity.AppDatabase
-import com.alejandro.roomproject.data.roomdb.RoomDataBase
 import com.alejandro.roomproject.extenciones.myToast
 import com.alejandro.roomproject.models.Users
 import com.alejandro.roomproject.modules.users.registeruser.interfaces.InterfaceRegister

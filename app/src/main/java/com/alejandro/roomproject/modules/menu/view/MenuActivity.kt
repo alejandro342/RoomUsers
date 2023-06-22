@@ -1,8 +1,8 @@
 package com.alejandro.roomproject.modules.menu.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.alejandro.roomproject.R
@@ -13,7 +13,7 @@ class MenuActivity : AppCompatActivity(), View.OnClickListener {
     var mBinding: ActivityMenuBinding? = null
     var mPresenterMenu: PresenterMenu? = null
 
-    private var mToolbar:Toolbar?=null
+    private var mToolbar: Toolbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,12 +26,13 @@ class MenuActivity : AppCompatActivity(), View.OnClickListener {
         toolbar()
     }
 
-    fun toolbar(){
+    fun toolbar() {
         mToolbar = findViewById(R.id.my_toolbar)
         mToolbar?.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
         mToolbar?.title = "Menu"
         mToolbar?.titleMarginStart = 450
     }
+
     override fun onClick(mItem: View?) {
         when (mItem) {
 
@@ -42,7 +43,10 @@ class MenuActivity : AppCompatActivity(), View.OnClickListener {
             mBinding!!.goToRegisterUsers -> {
                 mPresenterMenu?.goToRegister()
             }
-            mBinding!!.goToViewProfile ->{ mPresenterMenu?.goToProfile()}
+
+            mBinding!!.goToViewProfile -> {
+                mPresenterMenu?.goToProfile()
+            }
         }
     }
 }

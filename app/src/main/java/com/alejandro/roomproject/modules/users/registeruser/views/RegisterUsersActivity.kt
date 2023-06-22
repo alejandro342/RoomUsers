@@ -1,9 +1,9 @@
 package com.alejandro.roomproject.modules.users.registeruser.views
 
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.alejandro.roomproject.R

@@ -4,19 +4,14 @@ import android.content.Context
 import android.content.Intent
 import com.alejandro.roomproject.R
 import com.alejandro.roomproject.basepresenter.BasePresenterUser
-import com.alejandro.roomproject.data.roomdb.RoomDataBase
 import com.alejandro.roomproject.extenciones.myToast
 import com.alejandro.roomproject.models.Users
 import com.alejandro.roomproject.modules.login.interfaces.InterfaceLogin
 import com.alejandro.roomproject.modules.login.views.LoginActivity
 import com.alejandro.roomproject.modules.menu.view.MenuActivity
 import com.alejandro.roomproject.modules.users.registeruser.views.RegisterUsersActivity
-import com.alejandro.roomproject.utils.SharedPref
-import com.google.gson.Gson
-
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
@@ -47,8 +42,9 @@ class PresenterLogin(mContext: Context) : InterfaceLogin, BasePresenterUser(mCon
         launch(Dispatchers.IO) {
             val user = userDao.loginUser(email, password)
             if (user != null) {
-                setStatus(user)
+
                 saveSession(user.toJson())
+                setStatus(user)
                 loginSuccessful()
             } else {
                 withContext(Dispatchers.Main) {
