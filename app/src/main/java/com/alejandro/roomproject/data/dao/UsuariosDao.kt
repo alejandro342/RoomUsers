@@ -33,5 +33,6 @@ interface UsuariosDao {
     @Delete
     suspend fun deleteUser(user: Users)
 
-
+    @Query("SELECT password FROM users WHERE usuario = :usuario")
+    suspend fun getPassword(usuario: String): String
 }

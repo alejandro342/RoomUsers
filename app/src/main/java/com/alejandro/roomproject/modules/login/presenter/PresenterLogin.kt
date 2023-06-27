@@ -6,6 +6,7 @@ import com.alejandro.roomproject.R
 import com.alejandro.roomproject.basepresenter.BasePresenterUser
 import com.alejandro.roomproject.extenciones.myToast
 import com.alejandro.roomproject.models.Users
+import com.alejandro.roomproject.modules.getdatauser.views.GetDataUserActivity
 import com.alejandro.roomproject.modules.login.interfaces.InterfaceLogin
 import com.alejandro.roomproject.modules.login.views.LoginActivity
 import com.alejandro.roomproject.modules.menu.view.MenuActivity
@@ -74,7 +75,8 @@ class PresenterLogin(mContext: Context) : InterfaceLogin, BasePresenterUser(mCon
     }
 
     fun forgotMyDetails() {
-        mContext?.myToast("olvi")
+        val mIntent = Intent(mContext, GetDataUserActivity::class.java)
+        mContext?.startActivity(mIntent)
     }
 
     private fun loginSuccessful() {
