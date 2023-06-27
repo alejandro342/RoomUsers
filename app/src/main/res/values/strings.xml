@@ -48,6 +48,7 @@
     <string name="textStatus">Estado:</string>
     <string name="textDelete">Eliminar</string>
     <string name="textUpdate">Editar</string>
+    <string name="textEditPassword">Editar contraseña</string>
 
 
 </resources>

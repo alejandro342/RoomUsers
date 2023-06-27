@@ -42,7 +42,6 @@ class ProfileUserActivity : AppCompatActivity(), View.OnClickListener,
         mBinding!!.btnEditPassword.setOnClickListener(this)
         mBinding!!.imgCloseSession.setOnClickListener(this)
         mBinding!!.imgUpdateImageUser.setOnClickListener(this)
-        mBinding!!.btnSaveImageUser.setOnClickListener(this)
         mBinding!!.cardDeleteUser.setOnClickListener(this)
         myToolbar()
 
@@ -71,10 +70,6 @@ class ProfileUserActivity : AppCompatActivity(), View.OnClickListener,
 
             mBinding!!.imgUpdateImageUser -> {
                 selectImage()
-            }
-
-            mBinding!!.btnSaveImageUser -> {
-
             }
 
             mBinding!!.cardDeleteUser -> {
